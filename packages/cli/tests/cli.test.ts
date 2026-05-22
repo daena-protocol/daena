@@ -107,8 +107,19 @@ describe("validate", () => {
     expect(out.stdout).toBe("");
   });
 
-  it("with --verify fails cleanly on a placeholder signature", async () => {
-    // Pho Saigon fixture has a placeholder signature
+  it("with --verify succeeds against the fixture's matching DID document", async () => {
+    const realDidDocPath = resolve(
+      here, "..", "..", "core", "tests", "fixtures", "pho-saigon.did.json"
+    );
+    const out = captureOutput();
+    const code = await validate([fixturePath, "--verify", "--did-doc", realDidDocPath]);
+    out.restore();
+    expect(code).toBe(0);
+    expect(out.stdout).toContain("Signature verifies");
+    expect(out.stdout).toContain("did:web:phosaigon.example#key-1");
+  });
+
+  it("with --verify fails cleanly when the key isn't in the DID document", async () => {
     const didDocPath = join(tmpDir, "did.json");
     writeFileSync(didDocPath, JSON.stringify({
       id: "did:web:phosaigon.example",
@@ -118,7 +129,6 @@ describe("validate", () => {
     const code = await validate([fixturePath, "--verify", "--did-doc", didDocPath]);
     out.restore();
     expect(code).toBe(1);
-    // Either the signature length fails or keyId not found — both are valid
     expect(out.stderr).toMatch(/(64-byte|not found|does not verify)/);
   });
 });
@@ -249,7 +259,6 @@ describe("sign", () => {
     const keyPath = join(tmpDir, "daena.key");
     const didDocPath = join(tmpDir, "did.json");
 
-    // 1. init
     const o1 = captureOutput();
     expect(await init([
       "--output", docPath,
@@ -258,7 +267,6 @@ describe("sign", () => {
     ])).toBe(0);
     o1.restore();
 
-    // 2. keygen with did doc output
     const o2 = captureOutput();
     expect(await keygen([
       "--output", keyPath,
@@ -267,7 +275,6 @@ describe("sign", () => {
     ])).toBe(0);
     o2.restore();
 
-    // 3. sign
     const o3 = captureOutput();
     expect(await sign([docPath, "--key", keyPath])).toBe(0);
     o3.restore();
@@ -276,7 +283,6 @@ describe("sign", () => {
     expect(signed.signature.value).not.toBe("PLACEHOLDER_SIGNATURE_BASE64");
     expect(Buffer.from(signed.signature.value, "base64").length).toBe(64);
 
-    // 4. validate --verify
     const o4 = captureOutput();
     const code = await validate([docPath, "--verify", "--did-doc", didDocPath]);
     o4.restore();
@@ -295,7 +301,6 @@ describe("sign", () => {
     await sign([docPath, "--key", keyPath]);
     o1.restore();
 
-    // Tamper
     const signed = JSON.parse(readFileSync(docPath, "utf8"));
     signed.facts[0].value = "Tampered Co.";
     writeFileSync(docPath, JSON.stringify(signed, null, 2));
