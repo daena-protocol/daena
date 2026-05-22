@@ -1,0 +1,24 @@
+{
+  "name": "@daena/sdk",
+  "version": "0.0.0",
+  "description": "Agent-side SDK for the Daena Protocol — verified-by-default reads and capability invocation",
+  "license": "Apache-2.0",
+  "type": "module",
+  "main": "./src/index.ts",
+  "types": "./src/index.ts",
+  "exports": {
+    ".": {
+      "types": "./src/index.ts",
+      "default": "./src/index.ts"
+    }
+  },
+  "files": ["src", "dist"],
+  "scripts": {
+    "build": "tsup src/index.ts --format esm --dts --clean",
+    "test": "vitest run"
+  },
+  "dependencies": {
+    "@daena/core": "*",
+    "@daena/verifier": "*"
+  }
+}
