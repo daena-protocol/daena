@@ -14,3 +14,13 @@ export {
   DaenaActError,
   DaenaParseError
 } from "./errors.js";
+
+// Re-exports from @daena/verifier for agents that don't want to depend on
+// it directly (testing, offline verification, configuring custom resolvers).
+export { StaticDIDResolver, WebDIDResolver } from "@daena/verifier";
+export type {
+  DIDDocument,
+  DIDResolver,
+  VerificationMethod,
+  VerificationIssue
+} from "@daena/verifier";
