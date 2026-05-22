@@ -1,0 +1,90 @@
+{
+  "daena": "0",
+  "publisher": "did:web:phosaigon.example",
+  "facts": [
+    {
+      "id": "name",
+      "type": "https://daena.org/vocab/business/name",
+      "value": "Pho Saigon",
+      "asOf": "2026-05-21T00:00:00Z"
+    },
+    {
+      "id": "address",
+      "type": "https://daena.org/vocab/business/address",
+      "value": {
+        "street": "412 Hampshire St",
+        "city": "Cambridge",
+        "region": "MA",
+        "postalCode": "02139",
+        "country": "US"
+      },
+      "asOf": "2026-05-21T00:00:00Z"
+    },
+    {
+      "id": "hours",
+      "type": "https://daena.org/vocab/business/hours",
+      "value": [
+        { "day": "mon", "open": "11:00", "close": "22:00" },
+        { "day": "tue", "open": "11:00", "close": "22:00" },
+        { "day": "wed", "open": "11:00", "close": "22:00" },
+        { "day": "thu", "open": "11:00", "close": "22:00" },
+        { "day": "fri", "open": "11:00", "close": "23:00" },
+        { "day": "sat", "open": "11:00", "close": "23:00" },
+        { "day": "sun", "open": "12:00", "close": "21:00" }
+      ],
+      "asOf": "2026-05-21T00:00:00Z"
+    },
+    {
+      "id": "menu",
+      "type": "https://daena.org/vocab/restaurant/menu",
+      "value": [
+        {
+          "name": "Pho Bo",
+          "description": "Beef noodle soup with rice noodles, herbs, and slow-simmered broth",
+          "price": { "amount": 14.50, "currency": "USD" },
+          "tags": ["gluten-free", "dairy-free"]
+        },
+        {
+          "name": "Pho Chay",
+          "description": "Vegetable noodle soup with tofu and mushroom broth",
+          "price": { "amount": 13.00, "currency": "USD" },
+          "tags": ["vegan", "gluten-free", "dairy-free"]
+        },
+        {
+          "name": "Banh Mi Thit",
+          "description": "Vietnamese baguette with grilled pork, pickled vegetables, and cilantro",
+          "price": { "amount": 11.00, "currency": "USD" },
+          "tags": ["dairy-free"]
+        }
+      ],
+      "asOf": "2026-05-21T00:00:00Z"
+    }
+  ],
+  "capabilities": [
+    {
+      "id": "reserve",
+      "name": "Make a reservation",
+      "type": "https://daena.org/vocab/restaurant/reserve",
+      "parameters": {
+        "partySize": { "type": "integer", "min": 1, "max": 12, "required": true },
+        "dateTime": { "type": "datetime", "required": true },
+        "name": { "type": "string", "required": true },
+        "phone": { "type": "phone", "required": true },
+        "notes": { "type": "string", "required": false }
+      },
+      "endpoint": "https://phosaigon.example/daena/act/reserve",
+      "auth": "none"
+    }
+  ],
+  "render": {
+    "title": "Pho Saigon — Cambridge, MA",
+    "primary": ["menu", "hours", "address"],
+    "callsToAction": ["reserve"],
+    "theme": { "accent": "#b91c1c" }
+  },
+  "signature": {
+    "algorithm": "ed25519",
+    "value": "PLACEHOLDER_SIGNATURE_BASE64",
+    "keyId": "did:web:phosaigon.example#key-1"
+  }
+}
