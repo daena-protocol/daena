@@ -2,6 +2,8 @@
 import { init } from "./commands/init.js";
 import { validate } from "./commands/validate.js";
 import { render } from "./commands/render.js";
+import { keygen } from "./commands/keygen.js";
+import { sign } from "./commands/sign.js";
 import { showHelp, showVersion } from "./help.js";
 
 async function main(argv: string[]): Promise<number> {
@@ -23,6 +25,10 @@ async function main(argv: string[]): Promise<number> {
       return validate(args);
     case "render":
       return render(args);
+    case "keygen":
+      return keygen(args);
+    case "sign":
+      return sign(args);
     default:
       console.error(`daena: unknown command '${command}'`);
       console.error("Run 'daena --help' for usage.");

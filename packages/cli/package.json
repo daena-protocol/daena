@@ -15,6 +15,7 @@
   },
   "dependencies": {
     "@daena/core": "*",
-    "@daena/renderer": "*"
+    "@daena/renderer": "*",
+    "@daena/verifier": "*"
   }
 }
