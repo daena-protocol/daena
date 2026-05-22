@@ -17,7 +17,8 @@
     "build": "npm run build --workspaces --if-present",
     "test": "vitest run",
     "test:watch": "vitest",
-    "demo": "tsx demo/demo.ts"
+    "demo": "tsx demo/demo.ts",
+    "daena": "tsx packages/cli/src/index.ts"
   },
   "devDependencies": {
     "@types/node": "^20.11.0",
