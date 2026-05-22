@@ -1,21 +1,38 @@
 {
   "name": "@daena/cli",
-  "version": "0.0.0",
+  "version": "0.1.0-alpha.0",
   "description": "Command-line tools for the Daena Protocol",
   "license": "Apache-2.0",
   "type": "module",
   "bin": {
     "daena": "./dist/index.js"
   },
-  "main": "./src/index.ts",
-  "files": ["dist", "src"],
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "default": "./dist/index.js"
+    }
+  },
+  "files": ["src", "dist"],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/daena-protocol/daena.git",
+    "directory": "packages/cli"
+  },
+  "homepage": "https://daena-protocol.org",
+  "publishConfig": {
+    "access": "public"
+  },
   "scripts": {
-    "build": "tsup src/index.ts --format esm --dts --clean --banner='#!/usr/bin/env node'",
-    "test": "vitest run"
+    "build": "tsup",
+    "test": "vitest run",
+    "prepublishOnly": "npm run build"
   },
   "dependencies": {
-    "@daena/core": "*",
-    "@daena/renderer": "*",
-    "@daena/verifier": "*"
+    "@daena/core": "0.1.0-alpha.0",
+    "@daena/renderer": "0.1.0-alpha.0",
+    "@daena/verifier": "0.1.0-alpha.0"
   }
 }
