@@ -84,7 +84,7 @@
   },
   "signature": {
     "algorithm": "ed25519",
-    "value": "PLACEHOLDER_SIGNATURE_BASE64",
+    "value": "lS9B8rajaaS0hqGBpVunYuCNPNZyTibg6Sq8bnHJK/hNgXzZOS96KWzTq6p8B0PjiKVi3UKnfgLYFtoaOnG4CQ==",
     "keyId": "did:web:phosaigon.example#key-1"
   }
 }
