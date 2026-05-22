@@ -9,7 +9,7 @@
     "type": "git",
     "url": "https://github.com/daena-protocol/daena.git"
   },
-  "homepage": "https://daena.org",
+  "homepage": "https://daena-protocol.org",
   "workspaces": [
     "packages/*"
   ],

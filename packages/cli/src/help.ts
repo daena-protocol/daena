@@ -51,7 +51,7 @@ ${bold("Quickstart — sign your first Daena document locally:")}
   daena sign daena.json
   daena validate --verify daena.json --did-doc did.json
 
-Learn more at ${dim("https://daena.org")}
+Learn more at ${dim("https://daena-protocol.org")}
 `);
 }
 
